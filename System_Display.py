@@ -246,31 +246,39 @@ def Display_not_found_Cks(NFC_file_name,color):
     nx.draw_networkx_edges(Cflux, coord, style='dashed', edge_color = color, width=3)       
  
 
-# G  = Monta_sys(range(1,np.size(Ybus,0)+1),Ybus)
-# G1 = Monta_sys(S1,Ybus)
-# G2 = Monta_sys(S2,Ybus)
-# G3 = Monta_sys(S3,Ybus)
+G  = Monta_sys(range(1,np.size(Ybus,0)+1),Ybus)
+G1 = Monta_sys(S1,Ybus)
+G2 = Monta_sys(S2,Ybus)
+G3 = Monta_sys(S3,Ybus)
 
-# Display_sys(G, coord,'black')
+Display_sys(G, coord,'black')
 
 
-# Display_sys(G1,coord,'green')
-# Display_sys(G2,coord,'red')
-# Display_sys(G3,coord,'orange')
+Display_sys(G1,coord,'green')
+Display_sys(G2,coord,'red')
+Display_sys(G3,coord,'orange')
 
-# # with open('G12.txt', 'r') as f:
-# #     S12 = np.array([int(b)  for b in f])
+with open('G12.txt', 'r') as f:
+    S12 = np.array([int(b)  for b in f])
 
-# # with open('G13.txt', 'r') as f:
-# #     S13 = np.array([int(b)  for b in f])
+with open('G13.txt', 'r') as f:
+    S13 = np.array([int(b)  for b in f])
 
-# # with open('G23.txt', 'r') as f:
-# #     S23 = np.array([int(b)  for b in f])
+with open('G23.txt', 'r') as f:
+    S23 = np.array([int(b)  for b in f])
+
+G12 = Monta_sys(S13,Ybus)
+G13 = Monta_sys(S12,Ybus)
+G23 = Monta_sys(S23,Ybus)
+
+Display_sys(G12,coord,'olive')
+Display_sys(G13,coord,'purple')
+Display_sys(G23,coord,'blue')
 
 # Display_not_found_Cks('NFC51.txt','purple')
 
 
 
-# #fig, axes = plt.subplots(5, 5, figsize=(12, 10))
-# plt.show()
+#fig, axes = plt.subplots(5, 5, figsize=(12, 10))
+plt.show()
 
