@@ -186,19 +186,7 @@ coord = {
 117: np.array([200, 0]),
 118: np.array([370, -270])}
 
-#Grupo 1
-with open('Grupo1.txt', 'r') as f:
-    S1 = np.array([int(b)  for b in f])
-#print(G1)
 
-#Grupo 2
-with open('Grupo2.txt', 'r') as f:
-    S2 = np.array([int(b)  for b in f])
-#print(G2)
-
-#Grupo 3
-with open('Grupo3.txt', 'r') as f:
-    S3 = np.array([int(b)  for b in f])
 
 
 def Monta_sys(Ss,Ybus):
@@ -228,8 +216,8 @@ def Display_not_found_Cks(NFC_file_name,color):
 
 
     with open(NFC_file_name, 'r') as f:
-        for line in f:
-            NFC.append([int(num) for num in line.split(' ')])
+         for line in f:
+             NFC.append([int(num) for num in line.split(' ') if num != '\n'])
 
 
     Cflux = nx.Graph()
@@ -245,40 +233,47 @@ def Display_not_found_Cks(NFC_file_name,color):
 
     nx.draw_networkx_edges(Cflux, coord, style='dashed', edge_color = color, width=3)       
  
+if __name__ == '__main__':
+    #Grupo 1
+    with open('Grupo1e.txt', 'r') as f:
+        S1 = np.array([int(b)  for b in f])
+    #print(G1)
 
-G  = Monta_sys(range(1,np.size(Ybus,0)+1),Ybus)
-G1 = Monta_sys(S1,Ybus)
-G2 = Monta_sys(S2,Ybus)
-G3 = Monta_sys(S3,Ybus)
+    #Grupo 2
+    with open('Grupo2e.txt', 'r') as f:
+        S2 = np.array([int(b)  for b in f])
+    #print(G2)
 
-Display_sys(G, coord,'black')
+    #Grupo 3
+    with open('Grupo3e.txt', 'r') as f:
+        S3 = np.array([int(b)  for b in f])
 
+    G  = Monta_sys(range(1,np.size(Ybus,0)+1),Ybus)
+    G1 = Monta_sys(S1,Ybus)
+    G2 = Monta_sys(S2,Ybus)
+    G3 = Monta_sys(S3,Ybus)
 
-Display_sys(G1,coord,'green')
-Display_sys(G2,coord,'red')
-Display_sys(G3,coord,'orange')
-
-with open('G12.txt', 'r') as f:
-    S12 = np.array([int(b)  for b in f])
-
-with open('G13.txt', 'r') as f:
-    S13 = np.array([int(b)  for b in f])
-
-with open('G23.txt', 'r') as f:
-    S23 = np.array([int(b)  for b in f])
-
-G12 = Monta_sys(S13,Ybus)
-G13 = Monta_sys(S12,Ybus)
-G23 = Monta_sys(S23,Ybus)
-
-Display_sys(G12,coord,'olive')
-Display_sys(G13,coord,'purple')
-Display_sys(G23,coord,'blue')
-
-# Display_not_found_Cks('NFC51.txt','purple')
+    Display_sys(G, coord,'black')
 
 
+    Display_sys(G1,coord,'green')
+    Display_sys(G2,coord,'red')
+    Display_sys(G3,coord,'orange')
 
-#fig, axes = plt.subplots(5, 5, figsize=(12, 10))
-plt.show()
+    #display de areas comuns
+    # with open('G12.txt', 'r') as f:
+    #     S12 = np.array([int(b)  for b in f])
+
+    # G12 = Monta_sys(S12,Ybus)
+
+    # Display_sys(G12,coord,'blue')
+
+    # Display_not_found_Cks('NFC51.txt','purple')
+
+    Display_not_found_Cks('NFC42.txt','purple')
+
+
+
+    #fig, axes = plt.subplots(5, 5, figsize=(12, 10))
+    plt.show()
 
